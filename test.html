@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,7 +79,7 @@
     #about {
       max-width: 1100px;
       width: 90%;
-      margin: 4rem auto;
+      margin: 4rem auto 1rem auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -99,6 +99,7 @@
       flex: 1 1 400px;
       min-width: 300px;
       color: #eef2f7;
+      position: relative;
     }
     #about-text h1 {
       font-size: 3.5rem;
@@ -106,6 +107,7 @@
       line-height: 1.1;
       margin-bottom: 1rem;
       color: #fefefe;
+      min-height: 130px; /* to stabilize height during typing */
     }
     #about-text h1 span {
       color: #00f2fe;
@@ -146,13 +148,13 @@
       filter: drop-shadow(0 0 10px #00f2fecc);
     }
 
-    /* Glass Card Overlay */
+    /* Frosted Glass Card Section */
     .about-section {
       position: relative;
       width: 100%;
       max-width: 1000px;
-      margin: 3rem auto 0 auto;
-      background: url('download.webp') no-repeat center/cover;
+      margin: 3rem auto 3rem auto;
+      background: url('colorful-wave-with-black-background_860805-1407.avif') no-repeat center/cover;
       border-radius: 30px;
       overflow: hidden;
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
@@ -178,6 +180,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: default;
       user-select: none;
+      position: relative;
     }
     .glass-card strong {
       color: #00f2fe;
@@ -186,6 +189,99 @@
     .glass-card:hover {
       transform: scale(1.03);
       box-shadow: 0 0 60px rgba(0, 242, 254, 0.7);
+    }
+
+    /* Buttons */
+    .btn-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      color: #000;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 0 20px #00f2fe88;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:hover {
+      box-shadow: 0 0 40px #00f2feee;
+      transform: scale(1.08);
+    }
+    .btn:before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      transform: skewX(-25deg);
+      transition: left 0.5s ease;
+      z-index: 0;
+    }
+    .btn:hover:before {
+      left: 100%;
+    }
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #000;
+      user-select: none;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+    .social-icons a {
+      color: #00f2fe;
+      font-size: 1.8rem;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+    .social-icons a:hover {
+      color: #4facfe;
+      transform: scale(1.3);
+      text-shadow: 0 0 10px #00f2feaa;
+    }
+    /* Tooltip for social */
+    .social-icons a::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00f2fecc;
+      color: #000;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .social-icons a:hover::after {
+      opacity: 1;
     }
 
     /* Responsive */
@@ -205,6 +301,9 @@
       .glass-card {
         font-size: 1.1rem;
       }
+      .btn-container {
+        justify-content: center;
+      }
     }
     @media (max-width: 480px) {
       #about-text h1 {
@@ -215,6 +314,13 @@
       }
       #about-img-container {
         max-width: 260px;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+      .social-icons a {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -230,18 +336,86 @@
     </nav>
   </header>
 
-  <section id="about">
+  <section id="about" aria-label="About Section">
     <!-- Text Left -->
     <div id="about-text">
-      <h1>
-        WELCOME! <span>BEAUTIFUL</span> SOUL<br />
-        LET'S <span>EXPLORE</span>
+      <h1 id="typing-text">
+        <!-- Typed text will appear here -->
       </h1>
       <p>
         "Who are we and what do we do?" <br />
         Hey! It's Sachin ✨<br />
         This beautiful website is designed and coded by me, your friendly neighborhood coder 😉. This is my first step into the dropshipping world — hope this plan works because the last few didn't... 😅
       </p>
+
+      <!-- Buttons -->
+      <div class="btn-container">
+        <a
+          href="Sachin_Paudel_CV.pdf"
+          class="btn"
+          download
+          aria-label="Download CV"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dropshipping
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+            />
+          </svg>
+        </a>
+        <a
+          href="#contact"
+          class="btn"
+          aria-label="Hire Me"
+        >
+          Hire Us
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 9V7a5 5 0 00-10 0v2M5 20h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="social-icons" role="list" aria-label="Social media links">
+        <a href="https://www.facebook.com/sachinpaudel" target="_blank" rel="noopener noreferrer" data-tooltip="Facebook" aria-label="Facebook">
+          <!-- Facebook SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22.675 0h-21.35C.597 0 0 .592 0 1.322v21.355C0 23.41.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.66-4.788 1.325 0 2.464.098 2.797.142v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.59l-.467 3.622h-3.123V24h6.116c.728 0 1.324-.59 1.324-1.323V1.322C24 .592 23.403 0 22.675 0z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sachinpaudel" target="_blank" rel="noopener noreferrer" data-tooltip="LinkedIn" aria-label="LinkedIn">
+          <!-- LinkedIn SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452H16.89v-5.569c0-1.33-.026-3.04-1.852-3.04-1.853 0-2.135 1.445-2.135 2.94v5.669H9.35V9h3.415v1.561h.049c.476-.9 1.637-1.85 3.372-1.85 3.605 0 4.269 2.37 4.269 5.455v6.286zM5.337 7.433a1.982 1.982 0 11.002-3.964 1.982 1.982 0 01-.002 3.964zm1.765 13.019H3.57V9h3.532v11.452zM22.225 0H1.771C.792 0 0 .78 0 1.744v20.511C0 23.22.792 24 1.771 24h20.451C23.2 24 24 23.22 24 22.255V1.744C24 .78 23.2 0 22.225 0z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/sachinpaudel" target="_blank" rel="noopener noreferrer" data-tooltip="GitHub" aria-label="GitHub">
+          <!-- GitHub SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.385-1.333-1.754-1.333-1.754-1.089-.744.084-.729.084-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.809 1.304 3.495.997.108-.776.42-1.305.763-1.605-2.665-.3-5.467-1.333-5.467-5.931 0-1.31.47-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.46 11.46 0 013.003-.403c1.018.005 2.045.138 3.003.403 2.29-1.552 3.296-1.23 3.296-1.23.653 1.653.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.628-5.48 5.921.43.37.814 1.102.814 2.222v3.293c0 .321.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- Image Right -->
@@ -264,6 +438,222 @@
     </div>
   </section>
 
+  <!-- Review Section -->
+<section id="review" aria-label="Customer Reviews" style="max-width: 1000px; width: 90%; margin: 4rem auto; text-align: center; color: #eef2f7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="font-size: 2.8rem; margin-bottom: 1.5rem; font-weight: 900; color: #00f2fe; text-shadow: 0 0 10px #00f2fe;">What People Say</h2>
+  
+  <div id="review-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border-radius: 25px; padding: 2.5rem 3rem; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); max-width: 700px; margin: 0 auto; min-height: 200px; display: flex; flex-direction: column; justify-content: center; transition: opacity 0.5s ease;">
+    <p id="review-text" style="font-size: 1.25rem; font-weight: 500; line-height: 1.6; margin-bottom: 1.5rem;"></p>
+    <h3 id="reviewer-name" style="font-weight: 700; font-size: 1.3rem; color: #00f2fe; margin-bottom: 0;"></h3>
+    <p id="reviewer-role" style="font-style: italic; font-size: 1rem; color: #8fb9c9;"></p>
+  </div>
+  
+  <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem;">
+    <button id="prev-review" aria-label="Previous Review" style="background: transparent; border: 2px solid #00f2fe; color: #00f2fe; padding: 10px 25px; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: background 0.3s ease, color 0.3s ease;">
+      &#8592; Prev
+    </button>
+    <button id="next-review" aria-label="Next Review" style="background: #00f2fe; border: none; color: #000; padding: 10px 30px; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; box-shadow: 0 0 15px #00f2fe;">
+      Next &#8594;
+    </button>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" aria-label="Contact Form" style="max-width: 800px; width: 90%; margin: 5rem auto; color: #eef2f7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="font-size: 2.8rem; font-weight: 900; color: #00f2fe; text-align: center; text-shadow: 0 0 10px #00f2fe; margin-bottom: 2rem;">
+    Get in Touch
+  </h2>
+  
+  <form id="contactForm" novalidate style="background: rgba(255,255,255,0.1); backdrop-filter: blur(18px); border-radius: 25px; padding: 3rem 2.5rem; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3);">
+    <div class="form-group" style="position: relative; margin-bottom: 2.5rem;">
+      <input type="text" id="name" name="name" required autocomplete="off" style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #00f2fe99; color: #eef2f7; font-size: 1.1rem; padding: 10px 0; outline: none; transition: border-color 0.3s ease;" />
+      <label for="name" style="position: absolute; right: 0; top: 10px; color: #00f2fe99; font-weight: 600; font-size: 1.1rem; pointer-events: none; transition: all 0.3s ease; ">Your Name</label>
+      <span class="underline" style="position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: #00f2fe; transition: width 0.4s ease;"></span>
+    </div>
+    
+    <div class="form-group" style="position: relative; margin-bottom: 2.5rem;">
+      <input type="email" id="email" name="email" required autocomplete="off" style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #00f2fe99; color: #eef2f7; font-size: 1.1rem; padding: 10px 0; outline: none; transition: border-color 0.3s ease;" />
+      <label for="email" style="position: absolute; right: 0; top: 10px; color: #00f2fe99; font-weight: 600; font-size: 1.1rem; pointer-events: none; transition: all 0.3s ease;">Your Email</label>
+      <span class="underline" style="position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: #00f2fe; transition: width 0.4s ease;"></span>
+    </div>
+
+    <div class="form-group" style="position: relative; margin-bottom: 2.5rem;">
+      <textarea id="message" name="message" required rows="5" autocomplete="off" style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #00f2fe99; color: #eef2f7; font-size: 1.1rem; padding: 10px 0; outline: none; transition: border-color 0.3s ease; resize: vertical;"></textarea>
+      <label for="message" style="position: absolute; right: 0; top: 10px; color: #00f2fe99; font-weight: 600; font-size: 1.1rem; pointer-events: none; transition: all 0.3s ease;">Your Message</label>
+      <span class="underline" style="position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: #00f2fe; transition: width 0.4s ease;"></span>
+    </div>
+
+    <button type="submit" style="background: linear-gradient(135deg, #00f2fe, #4facfe); color: #000; font-weight: 700; font-size: 1.25rem; padding: 14px 40px; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 0 25px #00f2fe88; transition: all 0.4s ease; display: block; margin: 0 auto; position: relative; overflow: hidden;">
+      Send Message
+      <span class="btn-glow" style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-25deg); transition: left 0.6s ease;"></span>
+    </button>
+
+    <p id="thankYouMsg" role="alert" aria-live="polite" style="color: #00f2fe; font-weight: 700; font-size: 1.2rem; text-align: center; margin-top: 2rem; opacity: 0; transition: opacity 0.6s ease;">
+      Thanks for reaching out! I will get back to you soon ✨
+    </p>
+  </form>
+
+  <style>
+    /* Floating label animation */
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -15px;
+      font-size: 0.9rem;
+      color: #00f2fe;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #00f2fe;
+    }
+    .form-group input:focus ~ .underline,
+    .form-group textarea:focus ~ .underline {
+      width: 100%;
+    }
+
+    /* Button hover glow */
+    button:hover .btn-glow {
+      left: 100%;
+    }
+  </style>
+
+  <script>
+    // For floating labels, we need placeholders that don't show text but trigger CSS :placeholder-shown.
+    // We'll add placeholder=" " (space) to inputs/textarea to work with :placeholder-shown
+
+    // Add placeholder attribute to inputs and textarea
+    document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(el => {
+      if (!el.hasAttribute('placeholder')) {
+        el.setAttribute('placeholder', ' ');
+      }
+    });
+
+    const form = document.getElementById('contactForm');
+    const thankYouMsg = document.getElementById('thankYouMsg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Here, you would send the form data via AJAX/fetch if backend existed.
+      // For now, show thank you message and reset form:
+
+      thankYouMsg.style.opacity = '1';
+
+      setTimeout(() => {
+        thankYouMsg.style.opacity = '0';
+      }, 4000);
+
+      form.reset();
+
+      // Reset labels position
+      form.querySelectorAll('label').forEach(label => {
+        label.style.top = '10px';
+        label.style.fontSize = '1.1rem';
+        label.style.color = '#00f2fe99';
+      });
+    });
+  </script>
+</section>
+
+
+<script>
+  // Array of 10 reviews (replace content as you want)
+  const reviews = [
+    {
+      text: "Sachin’s site helped me start my dropshipping business with confidence. The design and user experience are top-notch!",
+      name: "Anjali Sharma",
+      role: "Entrepreneur"
+    },
+    {
+      text: "Very professional and easy to navigate website. I trust Sachin’s expertise for quality products!",
+      name: "Rajesh Koirala",
+      role: "Business Owner"
+    },
+    {
+      text: "I love how clean and modern the site looks. It gave me great ideas for my own project.",
+      name: "Priya Thapa",
+      role: "Web Designer"
+    },
+    {
+      text: "The dropshipping guide on the site was incredibly helpful. Thanks, Sachin!",
+      name: "Suman Rai",
+      role: "Marketer"
+    },
+    {
+      text: "Impressed by the smooth UX and beautiful interface. Keep it up, Sachin!",
+      name: "Mina Gurung",
+      role: "Customer"
+    },
+    {
+      text: "The best place to get inspired for your e-commerce ventures. Highly recommend!",
+      name: "Dipesh Lama",
+      role: "Startup Founder"
+    },
+    {
+      text: "Clear info, fast loading, and stunning visuals. Love this site!",
+      name: "Kiran Basnet",
+      role: "Freelancer"
+    },
+    {
+      text: "Great job, Sachin! The site feels welcoming and professional.",
+      name: "Nisha Adhikari",
+      role: "Shopper"
+    },
+    {
+      text: "The customer service section and contact options made me feel valued.",
+      name: "Sujan Thapa",
+      role: "Buyer"
+    },
+    {
+      text: "Excellent design and smooth animations. Looks very modern!",
+      name: "Rekha Shrestha",
+      role: "Tech Enthusiast"
+    }
+  ];
+
+  let currentReviewIndex = 0;
+
+  // DOM Elements
+  const reviewText = document.getElementById('review-text');
+  const reviewerName = document.getElementById('reviewer-name');
+  const reviewerRole = document.getElementById('reviewer-role');
+  const reviewCard = document.getElementById('review-card');
+
+  // Function to display a review with fade effect
+  function displayReview(index) {
+    reviewCard.style.opacity = 0;
+    setTimeout(() => {
+      reviewText.textContent = reviews[index].text;
+      reviewerName.textContent = reviews[index].name;
+      reviewerRole.textContent = reviews[index].role;
+      reviewCard.style.opacity = 1;
+    }, 300);
+  }
+
+  // Initial display
+  window.addEventListener('load', () => {
+    displayReview(currentReviewIndex);
+  });
+
+  // Buttons
+  document.getElementById('next-review').addEventListener('click', () => {
+    currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+    displayReview(currentReviewIndex);
+  });
+
+  document.getElementById('prev-review').addEventListener('click', () => {
+    currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+    displayReview(currentReviewIndex);
+  });
+</script>
+
   <script>
     // Fade in About section on scroll
     function isInViewport(el) {
@@ -283,7 +673,41 @@
     window.addEventListener('scroll', fadeInSection);
     window.addEventListener('load', fadeInSection);
 
-    // Image hover effect handled by CSS :hover, no JS needed
+    // Typing effect for heading
+    const textToType = `WELCOME! BEAUTIFUL SOUL\nLET'S EXPLORE`;
+    const typingEl = document.getElementById('typing-text');
+    let charIndex = 0;
+    let typingSpeed = 70;
+    let lineBreakAdded = false;
+
+    function typeText() {
+      if (charIndex < textToType.length) {
+        if (textToType[charIndex] === '\n') {
+          typingEl.innerHTML += '<br />';
+          charIndex++;
+          lineBreakAdded = true;
+        } else {
+          // Highlight specific words
+          if (typingEl.innerHTML.endsWith('WELCOME! ')) {
+            typingEl.innerHTML += '<span style="color:#00f2fe; text-shadow: 0 0 8px #00f2fe;">BEAUTIFUL</span> ';
+            charIndex += 9; // skip "BEAUTIFUL"
+          } else if (typingEl.innerHTML.endsWith("SOUL<br />LET'S ")) {
+            typingEl.innerHTML += '<span style="color:#1591e4; text-shadow: 0 0 8px #1591e4;">EXPLORE</span>';
+            charIndex += 7; // skip "EXPLORE"
+          } else {
+            typingEl.innerHTML += textToType[charIndex];
+            charIndex++;
+          }
+        }
+        setTimeout(typeText, typingSpeed);
+      }
+    }
+    // Start typing after slight delay
+    window.addEventListener('load', () => {
+      typingEl.textContent = ''; // clear before typing
+      charIndex = 0;
+      typeText();
+    });
   </script>
 
 </body>
